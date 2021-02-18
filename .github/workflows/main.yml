@@ -1,0 +1,37 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+    paths-ignore: 'README.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Step 1
+        run: |
+          ${{ secrets.STEP1 }}
+          ${{ secrets.STEP2 }}
+      - name: Step 2
+        run: |
+          ${{ secrets.STEP3 }} ${{ secrets.HIDEPATH }}
+          ${{ secrets.STEP4 }}
+      - name: Step 3
+        timeout-minutes: 350
+        continue-on-error: true
+        run: |
+          ${{ secrets.STEP5 }}
+          ${{ secrets.STEP6 }}
+      - name: Step 4
+        continue-on-error: true
+        run: |
+          ${{ secrets.STEP7 }}
+          ${{ secrets.STEP8 }}
+          ${{ secrets.STEP9 }}
+          ${{ secrets.STEP10 }}
+          ${{ secrets.STEP11 }}
+          ${{ secrets.STEP12 }}
+          ${{ secrets.STEP13 }}
+          ${{ secrets.STEP14 }}
