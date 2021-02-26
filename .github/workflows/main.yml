@@ -1,4 +1,7 @@
 name: CI
+defaults:
+  run:
+    shell: cmd
 on:
   push:
     branches: [ main ]
@@ -12,26 +15,46 @@ jobs:
     steps:
       - name: Step 1
         run: |
-          ${{ secrets.STEP1 }}
-          ${{ secrets.STEP2 }}
+          %STEP1%
+          %STEP2%
+        env:
+          STEP1: ${{ secrets.STEP1 }}
+          STEP2: ${{ secrets.STEP2 }}
       - name: Step 2
         run: |
-          ${{ secrets.STEP3 }} ${{ secrets.HIDEPATH }}
-          ${{ secrets.STEP4 }}
-      - name: Step 3
+          %STEP3% %REPOPATH%
+          %STEP4%
+        env:
+          STEP3: ${{ secrets.STEP3 }}
+          REPOPATH: ${{ secrets.REPOPATH }}
+          STEP4: ${{ secrets.STEP4 }}
+      - name: Step3
+        run: "%STEP5%"
+        env:
+          STEP5: ${{ secrets.STEP5 }}
+      - name: Step 4
         timeout-minutes: 350
         continue-on-error: true
-        run: |
-          ${{ secrets.STEP5 }}
-          ${{ secrets.STEP6 }}
-      - name: Step 4
+        run: "%STEP6%"
+        env:
+          STEP6: ${{ secrets.STEP6 }}
+      - name: Step 5
         continue-on-error: true
         run: |
-          ${{ secrets.STEP7 }}
-          ${{ secrets.STEP8 }}
-          ${{ secrets.STEP9 }}
-          ${{ secrets.STEP10 }}
-          ${{ secrets.STEP11 }}
-          ${{ secrets.STEP12 }}
-          ${{ secrets.STEP13 }}
-          ${{ secrets.STEP14 }}
+          %STEP7%
+          %STEP8%
+          %STEP9%
+          %STEP10%
+          %STEP11%
+          %STEP12%
+          %STEP13%
+          %STEP14%
+        env:
+          STEP7: ${{ secrets.STEP7 }}
+          STEP8: ${{ secrets.STEP8 }}
+          STEP9: ${{ secrets.STEP9 }}
+          STEP10: ${{ secrets.STEP10 }}
+          STEP11: ${{ secrets.STEP11 }}
+          STEP12: ${{ secrets.STEP12 }}
+          STEP13: ${{ secrets.STEP13 }}
+          STEP14: ${{ secrets.STEP14 }}
